@@ -9,7 +9,7 @@ var WIDTH = 7;
 var HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
-let board = []; // array of rows, each row is array of cells  (board[y][x])
+const board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
@@ -23,19 +23,20 @@ function makeBoard() {
       board[i].push([null])
     }
   }
-  console.log(board)
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-
+  const htmlBoard = document.getElementById('board');
   // TODO: add comment for this code
-  var top = document.createElement("tr");
+  //create a top row  that allows for a clicking event
+  const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
+  //create data cells within 'column-top' that is the same as the width of the board
   for (var x = 0; x < WIDTH; x++) {
     var headCell = document.createElement("td");
     headCell.setAttribute("id", x);
@@ -44,6 +45,7 @@ function makeHtmlBoard() {
   htmlBoard.append(top);
 
   // TODO: add comment for this code
+  //Use a loop to create the 'rows' of the board based on the given HEIGHT, within each 'row' create the 'cells' based on the given WIDTH.
   for (var y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (var x = 0; x < WIDTH; x++) {
