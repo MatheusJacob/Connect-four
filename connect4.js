@@ -74,9 +74,8 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   const div = document.createElement('div');
-  div.className = `piece, ${currPlayer}`;  
-  
-  
+  div.className = `piece ${currPlayer}`;  
+  top.appendChild(div)
 }
 
 /** endGame: announce game end */
@@ -110,8 +109,8 @@ function handleClick(evt) {
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
 
+
   // switch players
-  // TODO: switch currPlayer 1 <-> 2
   currPlayer = (currPlayer === 'p1') ? 'p2' : 'p1';
 }
 
