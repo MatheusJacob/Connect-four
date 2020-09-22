@@ -8,7 +8,7 @@
 var WIDTH = 7;
 var HEIGHT = 6;
 
-let currPlayer = 1; // active player: 1 or 2
+let currPlayer = 'p1'; // active player: 1 or 2
 const board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
@@ -20,13 +20,12 @@ function makeBoard() {
   for (let i = 0; i < HEIGHT; i++){
     board.push([])
     for (let j = 0; j < WIDTH; j++){
-      board[i].push([null])
+      board[i].push(null)
     }
   }
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
-
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
   const htmlBoard = document.getElementById('board');
@@ -34,7 +33,7 @@ function makeHtmlBoard() {
   //create a top row  that allows for a clicking event
   const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
-  top.addEventListener("click", handleClick);
+  top.addEventListener("click", handleClick)
 
   //create data cells within 'column-top' that is the same as the width of the board
   for (var x = 0; x < WIDTH; x++) {
@@ -45,11 +44,12 @@ function makeHtmlBoard() {
   htmlBoard.append(top);
 
   // TODO: add comment for this code
-  //Use a loop to create the 'rows' of the board based on the given HEIGHT, within each 'row' create the 'cells' based on the given WIDTH.
+  //Use a loop to create the 'rows' of the board based on the given HEIGHT 
   for (var y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
+    // Within each 'row' create the 'cells' based on the given WIDTH.
     for (var x = 0; x < WIDTH; x++) {
-      const cell = document.createElement("td");
+      var cell = document.createElement("td");
       cell.setAttribute("id", `${y}-${x}`);
       row.append(cell);
     }
@@ -57,17 +57,26 @@ function makeHtmlBoard() {
   }
 }
 
-/** findSpotForCol: given column x, return top empty y (null if filled) */
-
+/** findSpotForCol: given column x, return top-most empty y (null if filled) */
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  // goes through the x column, index by index, and looks for the first open spot. 
+  let column = []
+  for (let y = 0; y < board.length; y++) {
+    if (board[y][x] === null) {
+      column.push(board[y][x])
+    }
+  }
+  return(column.lastIndexOf(null))
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
-
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
+  const div = document.createElement('div');
+  div.className = `piece, ${currPlayer}`;  
+  
+  
 }
 
 /** endGame: announce game end */
@@ -80,10 +89,11 @@ function endGame(msg) {
 
 function handleClick(evt) {
   // get x from ID of clicked cell
-  var x = +evt.target.id;
+  let x = +evt.target.id;
+  // console.log(x)
 
   // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
+  let y = findSpotForCol(x);
   if (y === null) {
     return;
   }
@@ -102,6 +112,7 @@ function handleClick(evt) {
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
+  currPlayer = (currPlayer === 'p1') ? 'p2' : 'p1';
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -140,3 +151,4 @@ function checkForWin() {
 
 makeBoard();
 makeHtmlBoard();
+
