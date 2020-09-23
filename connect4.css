@@ -1,8 +1,18 @@
-/* game board table */
+#game{
+  margin-top: 6%;
+}
 
+h1 {
+  text-align: center;
+}
+#board {
+  margin: 0 auto 5%;
+}
+
+/* game board table */
 #board td {
-  width: 50px;
-  height: 50px;
+  width: 5em;
+  height: 5em;
   border: solid 1px #666;
 }
 
@@ -15,6 +25,7 @@
   height: 80%;
   border-radius: 50%;
   background-color: blue;
+  top: 0;
 }
 .piece.p2 {
   /* TODO: make into circles */
@@ -26,10 +37,11 @@
 }
 
 /* column-top is table row of clickable areas for each column */
-
 #column-top td {
   border: dashed 1px lightgray;
+  
 }
+
 
 #column-top td:hover {
   background-color: gold;
