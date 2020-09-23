@@ -61,13 +61,13 @@ function makeHtmlBoard() {
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
   // goes through the x column, index by index, and looks for the first open spot. 
-  let column = []
+  let res = null;
   for (let y = 0; y < board.length; y++) {
     if (board[y][x] === null) {
-      column.push(board[y][x])
+      res = y;
     }
   }
-  return(column.lastIndexOf(null))
+  return res;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -89,17 +89,19 @@ function endGame(msg) {
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
+  
   // get x from ID of clicked cell
   let x = +evt.target.id;
-  // console.log(x)
 
   // get next spot in column (if none, ignore click)
   let y = findSpotForCol(x);
-  if (y === null) {
+  console.log(y)
+  if (y === null){
     return;
   }
 
   // place piece in board and add to HTML table
+  board[y][x] = `${currPlayer}`
   // TODO: add line to update in-memory board
   placeInTable(y, x);
 
@@ -109,11 +111,11 @@ function handleClick(evt) {
   }
 
   // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
 
-
-  // switch players
-  currPlayer = (currPlayer === 'p1') ? 'p2' : 'p1';
+  
+    // switch players
+    currPlayer = (currPlayer === 'p1') ? 'p2' : 'p1';
+  
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
