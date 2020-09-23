@@ -80,15 +80,13 @@ function placeInTable(y, x) {
 }
 
 /** endGame: announce game end */
-
 function endGame(msg) {
   // TODO: pop up alert message
+  setTimeout(function () {alert(msg)}, 500);
 }
 
 /** handleClick: handle click of column top to play piece */
-
 function handleClick(evt) {
-  
   // get x from ID of clicked cell
   let x = +evt.target.id;
 
@@ -101,8 +99,16 @@ function handleClick(evt) {
   // place piece in board and add to HTML table
   board[y][x] = `${currPlayer}`
 
-  // TODO: add line to update in-memory board
-  placeInTable(y, x);
+    // TODO: add line to update in-memory board
+    placeInTable(y, x);
+  
+  // check for win
+  if(checkForWin()) {
+    return endGame(`Player ${currPlayer} won!`);
+  }
+  
+    // switch players
+  currPlayer = (currPlayer === 'p1') ? 'p2' : 'p1';
 
     // check for tie
     let gameOver = board.every(function (row) {
@@ -115,24 +121,16 @@ function handleClick(evt) {
       alert("It's a tie!")
       return;
     }
-
-  // switch players
-  currPlayer = (currPlayer === 'p1') ? 'p2' : 'p1';
-
-    // check for win
-  if (checkForWin()) {
-    return endGame(`Player ${currPlayer} won!`);
-  }
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
-
 function checkForWin() {
   function _win(cells) {
     // Check four cells to see if they're all color of current player
     //  - cells: list of four (y, x) cells
     //  - returns true if all are legal coordinates & all match currPlayer
 
+//checks to make sure the pieces are within the board and the piece corresponds to the player
     return cells.every(
       ([y, x]) =>
         y >= 0 &&
@@ -143,15 +141,17 @@ function checkForWin() {
     );
   }
 
-  // TODO: read and understand this code. Add comments to help you.
-
+  //goes through 'rows' in the board
   for (var y = 0; y < HEIGHT; y++) {
+    //goes through each cell within the 'rows'
     for (var x = 0; x < WIDTH; x++) {
+    //defines the various ways the pieces will connect four times
       var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
       var vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
       var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
       var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
+      //if any of the variables are true, return true;
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
       }
