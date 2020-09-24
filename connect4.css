@@ -92,7 +92,7 @@ button{
 #column-top td {
   border: dashed 1px white;
   position: relative;
-  background-color: #fffb8f6c;
+  background-color: #fcfae469;
   animation: glow 1.5s infinite;
 }
 
@@ -107,6 +107,6 @@ button{
 
 
 #column-top td:hover {
-  background-color: #fff955da;
+  background-color: #fdf746b4;
 }
 

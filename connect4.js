@@ -102,6 +102,7 @@ function handleClick(evt) {
   function endGame() {
     // TODO: pop up alert message
     h1 = document.querySelector('h1').innerText = `Player ${currPlayer} won!`;
+    return;
   }
   
   // check for win & annouce winner 
@@ -121,7 +122,7 @@ function handleClick(evt) {
     })
   
     if(gameOver) {
-      alert("It's a tie!")
+      h1 = document.querySelector('h1').innerText = "It's a tie!"
       return;
     }
 }
