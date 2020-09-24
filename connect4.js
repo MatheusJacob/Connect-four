@@ -89,7 +89,7 @@ function handleClick(evt) {
 
   // get next spot in column (if none, ignore click)
   let y = findSpotForCol(x);
-  if (y === undefined){
+  if (y === null){
     return;
   }
 
@@ -97,11 +97,17 @@ function handleClick(evt) {
   board[y][x] = `${currPlayer}`
 
     // TODO: add line to update in-memory board
-    placeInTable(y, x);
+   placeInTable(y, x);
+  
+  function endGame() {
+    // TODO: pop up alert message
+    h1 = document.querySelector('h1').innerText = `Player ${currPlayer} won!`;
+  }
   
   // check for win & annouce winner 
   if(checkForWin()) {
-    h1 = document.querySelector('h1').innerText = `Player ${currPlayer} won!`;
+    endGame();
+    return;
   }
   
     // switch players
