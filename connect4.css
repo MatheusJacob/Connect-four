@@ -80,11 +80,11 @@ button{
   }
 }
 
-.piece.p1 {
+.piece.one {
   background-color: rgb(91, 91, 255);
   
 }
-.piece.p2 {
+.piece.two {
   background-color: rgb(255, 86, 86);
 }
 

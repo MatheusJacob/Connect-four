@@ -1,3 +1,5 @@
+  const htmlBoard = document.getElementById('board');
+
 /** Connect Four
  *
  * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
@@ -9,8 +11,8 @@ var WIDTH = 7;
 var HEIGHT = 6;
 
 
-let currPlayer = 'p1'; // active player: 1 or 2
-const board = []; // array of rows, each row is array of cells  (board[y][x])
+let currPlayer = 'one'; // active player: 1 or 2
+let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
@@ -31,7 +33,6 @@ function makeBoard() {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-  const htmlBoard = document.getElementById('board');
   // TODO: add comment for this code
   //create a top row  that allows for a clicking event
   const top = document.createElement("tr");
@@ -111,7 +112,7 @@ function handleClick(evt) {
   }
   
     // switch players
-  currPlayer = (currPlayer === 'p1') ? 'p2' : 'p1';
+  currPlayer = (currPlayer === 'one') ? 'two' : 'one';
 
     // check for tie
     let gameOver = board.every(function (row) {
@@ -164,4 +165,13 @@ function checkForWin() {
 
 makeBoard();
 makeHtmlBoard();
+
+const reset = document.querySelector('button');
+reset.addEventListener('click', function () {
+  htmlBoard.remove();
+  alert('clicked')
+  makeBoard();
+  makeHtmlBoard();
+
+})
 
