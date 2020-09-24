@@ -1,35 +1,62 @@
-/* game board table */
+#game{
+  margin-top: 4%;
+}
 
+h1 {
+  text-align: center;
+  font-size: 4em;
+  margin-bottom: 1%;
+}
+#board {
+  margin: 0 auto 5%;
+}
+
+/* game board table */
 #board td {
-  width: 50px;
-  height: 50px;
+  width: 5em;
+  height: 5em;
   border: solid 1px #666;
 }
 
 /* pieces are div within game table cells: draw as colored circles */
 
+.piece{
+    margin: 5px;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    animation: 3s linear 1s slidein;
+    position: relative;
+    animation: drop 1s 1;
+}
+
+@keyframes drop {
+  0% {
+     transform: translateY(-500px);
+  }
+  100% {
+     transform: translateY(0px);
+  }
+}
+
 .piece.p1 {
-  /* TODO: make into circles */
-  margin: 5px;
-  width: 80%;
-  height: 80%;
-  border-radius: 50%;
-  background-color: blue;
+  border: rgb(8, 43, 197) 2px solid;
+  background-color: rgb(8, 74, 197);
+  
 }
 .piece.p2 {
-  /* TODO: make into circles */
-  margin: 5px;
-  width: 80%;
-  height: 80%;
-  border-radius: 50%;
+
+  border: rgb(223, 9, 19) 2px solid;
   background-color: red;
 }
 
 /* column-top is table row of clickable areas for each column */
-
 #column-top td {
   border: dashed 1px lightgray;
+  
 }
+
+
 
 #column-top td:hover {
   background-color: gold;
