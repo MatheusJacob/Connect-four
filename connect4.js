@@ -82,12 +82,6 @@ function placeInTable(y, x) {
    spot.append(div)
 }
 
-/** endGame: announce game end */
-function endGame(msg) {
-  // TODO: pop up alert message
-  setTimeout(function () {alert(msg)}, 500);
-}
-
 /** handleClick: handle click of column top to play piece */
 function handleClick(evt) {
   // get x from ID of clicked cell
@@ -105,9 +99,9 @@ function handleClick(evt) {
     // TODO: add line to update in-memory board
     placeInTable(y, x);
   
-  // check for win
+  // check for win & annouce winner 
   if(checkForWin()) {
-    return endGame(`Player ${currPlayer} won!`);
+    h1 = document.querySelector('h1').innerText = `Player ${currPlayer} won!`;
   }
   
     // switch players
