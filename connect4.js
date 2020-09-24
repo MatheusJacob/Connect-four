@@ -1,5 +1,3 @@
-  const htmlBoard = document.getElementById('board');
-
 /** Connect Four
  *
  * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
@@ -33,6 +31,7 @@ function makeBoard() {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+  const htmlBoard = document.getElementById('board');
   // TODO: add comment for this code
   //create a top row  that allows for a clicking event
   const top = document.createElement("tr");
@@ -50,7 +49,7 @@ function makeHtmlBoard() {
   // TODO: add comment for this code
   //Use a loop to create the 'rows' of the board based on the given HEIGHT 
   for (var y = 0; y < HEIGHT; y++) {
-    const row = document.createElement("tr");
+    let row = document.createElement("tr");
     // Within each 'row' create the 'cells' based on the given WIDTH.
     for (var x = 0; x < WIDTH; x++) {
       var cell = document.createElement("td");
@@ -76,7 +75,7 @@ function findSpotForCol(x) {
 /** placeInTable: update DOM to place piece into HTML table of board */
 function placeInTable(y, x) {
    // TODO: make a div and insert into correct table cell
-   const div = document.createElement('div');
+   let div = document.createElement('div');
    div.className = `piece ${currPlayer}`;
 
    let spot = document.getElementById(`${y}-${x}`)
@@ -168,10 +167,5 @@ makeHtmlBoard();
 
 const reset = document.querySelector('button');
 reset.addEventListener('click', function () {
-  htmlBoard.remove();
-  alert('clicked')
-  makeBoard();
-  makeHtmlBoard();
-
+  window.location.reload();
 })
-
