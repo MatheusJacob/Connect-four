@@ -92,7 +92,7 @@ button{
 #column-top td {
   border: dashed 1px white;
   position: relative;
-  background-color: #fcfae469;
+  background-color: #fcfae46e;
   animation: glow 1.5s infinite;
 }
 
