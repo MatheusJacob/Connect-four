@@ -5,8 +5,9 @@
  * board fills (tie)
  */
 
-var WIDTH = 7;
-var HEIGHT = 6;
+ ////replace with const
+const WIDTH = 7;
+const HEIGHT = 6;
 
 
 ////maybe use number instead of string, its easier to manipulate
@@ -18,16 +19,17 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard() {
+
+  let localBoard = []
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
   for (let i = 0; i < HEIGHT; i++){
-    board.push([])
+    localBoard.push([])
     for (let j = 0; j < WIDTH; j++){
-      board[i].push(null)
+      localBoard[i].push(null)
     }
   }
+  return localBoard;
 }
-
-
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 function makeHtmlBoard() {
@@ -71,18 +73,29 @@ function findSpotForCol(x) {
       return y;
     }
   }
+
+  return null;
   ////missing return null
 }
 
+function createPiece(currPlayer){
+  let div = document.createElement('div');
+  div.className = `piece ${currPlayer}`;
+
+  return div;
+}
 ////break this into 2 smaller functions
 /** placeInTable: update DOM to place piece into HTML table of board */
-function placeInTable(y, x) {
+function placeInTable(y, x, piece) {
    // TODO: make a div and insert into correct table cell
-   let div = document.createElement('div');
-   div.className = `piece ${currPlayer}`;
-
    let spot = document.getElementById(`${y}-${x}`)
-   spot.append(div)
+   spot.append(piece)
+}
+
+function endGame(message) {
+  // TODO: pop up alert message
+  h1 = document.querySelector('h1').innerText = message;
+  ////no need to return at the end
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -99,43 +112,45 @@ function handleClick(evt) {
   // place piece in board and add to HTML table
   board[y][x] = `${currPlayer}`
 
+  let piece = createPiece(currPlayer);
     // TODO: add line to update in-memory board
-   placeInTable(y, x);
+    htmlBoard.append(piece);
+   placeInTable(y, x, piece);
   
    ////move this function outside the handle click event
    ////receive the message as parameter
-  function endGame() {
-    // TODO: pop up alert message
-    h1 = document.querySelector('h1').innerText = `Player ${currPlayer} won!`;
-    ////no need to return at the end
-    return;
-  }
+  
   
   // check for win & annouce winner 
   if(checkForWin()) {
-    endGame();
+    endGame(`Player ${currPlayer} won!`);
     return;
   }
   
     // switch players
-  currPlayer = (currPlayer === 'one') ? 'two' : 'one';
+    switchCurrentPlayer()
 
   ////check for tie needs to be before switch players
     // check for tie
-    ////check for tie function
-    let gameOver = board.every(function (row) {
-      return row.every(function (cells) {
-        return cells;
-      })
-    })
-  
-    if(gameOver) {
-      ////call the endgame function
-      h1 = document.querySelector('h1').innerText = "It's a tie!"
+    ////check for tie function  
+    if(checkForTie()) {
+      endGame("It's a tie!")     
       return;
     }
 }
 
+function switchCurrentPlayer(){
+  currPlayer = (currPlayer === 'one') ? 'two' : 'one';
+  
+}
+
+function checkForTie(){
+  return board.every(function (row) {
+    return row.every(function (cells) {
+      return cells;
+    })
+  })
+}
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 function checkForWin() {
   function _win(cells) {
@@ -172,7 +187,7 @@ function checkForWin() {
   }
 }
 
-makeBoard();
+board = makeBoard();
 makeHtmlBoard();
 
 const reset = document.querySelector('button');
