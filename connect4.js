@@ -9,6 +9,7 @@ var WIDTH = 7;
 var HEIGHT = 6;
 
 
+////maybe use number instead of string, its easier to manipulate
 let currPlayer = 'one'; // active player: 1 or 2
 let board = []; // array of rows, each row is array of cells  (board[y][x])
 
@@ -70,8 +71,10 @@ function findSpotForCol(x) {
       return y;
     }
   }
+  ////missing return null
 }
 
+////break this into 2 smaller functions
 /** placeInTable: update DOM to place piece into HTML table of board */
 function placeInTable(y, x) {
    // TODO: make a div and insert into correct table cell
@@ -99,9 +102,12 @@ function handleClick(evt) {
     // TODO: add line to update in-memory board
    placeInTable(y, x);
   
+   ////move this function outside the handle click event
+   ////receive the message as parameter
   function endGame() {
     // TODO: pop up alert message
     h1 = document.querySelector('h1').innerText = `Player ${currPlayer} won!`;
+    ////no need to return at the end
     return;
   }
   
@@ -114,7 +120,9 @@ function handleClick(evt) {
     // switch players
   currPlayer = (currPlayer === 'one') ? 'two' : 'one';
 
+  ////check for tie needs to be before switch players
     // check for tie
+    ////check for tie function
     let gameOver = board.every(function (row) {
       return row.every(function (cells) {
         return cells;
@@ -122,6 +130,7 @@ function handleClick(evt) {
     })
   
     if(gameOver) {
+      ////call the endgame function
       h1 = document.querySelector('h1').innerText = "It's a tie!"
       return;
     }
